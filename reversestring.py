@@ -19,6 +19,6 @@ def main():
 
 text = tkinter.Entry(win)
 text.pack()
-b = tkinter.Button(win, text="Copy Reverse of the String", width=20, command=main)
+b = tkinter.Button(win, text="Reverse", width=20, command=main)
 b.pack()
 tkinter.mainloop()
