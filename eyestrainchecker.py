@@ -1,4 +1,4 @@
-#not my code. This is from ASDRP program that i found interesting
+# not my code. This is from ASDRP program that i found interesting
 from scipy.spatial import distance as dist
 from imutils.video import FileVideoStream
 from imutils.video import VideoStream
@@ -11,6 +11,8 @@ import dlib
 import cv2
 import PySimpleGUI as sg
 import time
+
+
 def eye_aspect_ratio(eye):
     # calculate vertical distances
     vert_dist_1 = dist.euclidean(eye[1], eye[5])
@@ -20,6 +22,8 @@ def eye_aspect_ratio(eye):
     ear = (vert_dist_1 + vert_dist_2) / (2 * horiz_dist)
     return ear
 #  parse arguments
+
+
 ap = argparse.ArgumentParser()
 ap.add_argument("-p", "--shape-predictor", required=True, help="path to facial landmark predictor")
 ap.add_argument("-v", "--video", type=str, default="", help="path to input video file")
