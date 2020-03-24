@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <title>Login Page</title>
+  </head>
+  <body bgcolor="000000">
+    <center>
+      <h1 style="color:white;">Login Here</h1>
+      <p></p>
+	  <p style="color:white;">Username</p>
+      <input id="usn"/><br/>
+      <p style="color:white;">Password</p>
+	  <input id="psswd" /><br/>
+      <p></p>
+	  <button id="login" style="color:black;">Sign In</button>
+      <p></p>
+      <p style="color:white;">Link to your homepage</p>
+      <table id="link" style="color:white;"></table>
+    </center>
+    <script>
+      $(document).ready(function(){
+		$("#login").click(function(){
+          $( "#link" ).empty();
+          var name = $("#usn").val();
+		  var pass = $("#psswd").val();
+          var saveData = $.ajax({
+            type:"POST",
+            url:"/loginbackend",
+            data: '{"a":"'+name+','+pass+'"}',
+            dataType: "json",
+            contentType:"application/json",
+		    error: function (xhr, ajaxOptions, thrownError) {
+              alert(xhr.status);
+              alert(thrownError);
+            },
+            success: function(resultData) {
+              console.log(resultData);
+		      $("<tr><td><a href = "+resultData+">Your Home Page</a></td></tr>").appendTo("#link");
+            }
+          })
+        });
+      });
+    </script>
+  </body>
+</html>
