@@ -6,5 +6,6 @@ s.listen(2)
 
 while True:
     conn, adr = s.accept()
-    msg = pickle.loads(conn.recv(1024))
+    msg = conn.recv(4096)
+    print(msg)
     conn.send(msg)

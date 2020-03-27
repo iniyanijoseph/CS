@@ -4,6 +4,7 @@ from PIL import ImageTk, Image
 import io
 import socket
 import pickle
+import numpy as np
 root = Tk()
 root.attributes('-fullscreen', True)
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -11,13 +12,20 @@ s.connect((socket.gethostname(), 9873))
 left = Frame(root, borderwidth=3, relief="solid")
 right = Frame(root, borderwidth=2, relief="solid")
 
+
 def video_stream():
     _, frame = cap.read()
     cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
-    img = Image.fromarray(cv2image)
-    s.send(pickle.dumps(img))
-    msg = pickle.loads(s.recv(1024))
-    imgtk = ImageTk.PhotoImage(image=msg)
+    s.send(pickle.dumps(cv2image))
+    data = b""
+    for element in range(200):
+        packet = s.recv(4096)
+        if not packet:
+            break
+        data += packet
+    msg = pickle.loads(data)
+    img = Image.fromarray(msg)
+    imgtk = ImageTk.PhotoImage(image=img)
     lmain.imgtk = imgtk
     lmain.configure(image=imgtk)
     lmain.after(1, video_stream)
