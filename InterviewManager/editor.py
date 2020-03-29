@@ -16,6 +16,7 @@ right = Frame(root, borderwidth=2, relief="solid")
 def video_stream():
     _, frame = cap.read()
     cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
+    """
     s.send(pickle.dumps(cv2image))
     data = b""
     for element in range(2):
@@ -23,12 +24,23 @@ def video_stream():
         if not packet:
             break
         data += packet
-    msg = pickle.loads(data)
-    img = Image.fromarray(msg)
+    msg = pickle.loads(data)"""
+    img = Image.fromarray(cv2image)
     imgtk = ImageTk.PhotoImage(image=img)
     lmain.imgtk = imgtk
     lmain.configure(image=imgtk)
     lmain.after(1, video_stream)
+
+
+def textwid():
+    txt = text.get("1.0", END)
+    s.send(pickle.dumps(txt))
+    print(pickle.dumps(txt))
+    msg = pickle.loads(s.recv(4096))
+    print(msg)
+    text.delete("1.0", END)
+    text.insert(END, msg)
+    root.after(1, textwid)
 
 
 def run():
@@ -81,5 +93,6 @@ Configure and Run
 """
 cap = cv2.VideoCapture(0)
 video_stream()
+textwid()
 root.config(menu=menubar)
 root.mainloop()
