@@ -9,6 +9,7 @@ root = Tk()
 root.attributes('-fullscreen', True)
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((socket.gethostname(), 9873))
+
 left = Frame(root, borderwidth=3, relief="solid")
 right = Frame(root, borderwidth=2, relief="solid")
 
@@ -32,15 +33,15 @@ def video_stream():
     lmain.after(1, video_stream)
 
 
-def textwid():
+def textwidget():
     txt = text.get("1.0", END)
     s.send(pickle.dumps(txt))
-    print(pickle.dumps(txt))
-    msg = pickle.loads(s.recv(4096))
+    msg = s.recv(4096)
+    msg = pickle.loads(msg)
     print(msg)
     text.delete("1.0", END)
     text.insert(END, msg)
-    root.after(1, textwid)
+    root.after(1000, textwidget)
 
 
 def run():
@@ -51,7 +52,7 @@ def run():
         sys.stdout = old_stdout
         results.delete("1.0", END)
         results.insert(END, redirected_output.getvalue())
-    except:  # catch *all* exceptions
+    except:
         e = sys.exc_info()[0]
         results.delete("1.0", END)
         results.insert(END, e)
@@ -93,6 +94,6 @@ Configure and Run
 """
 cap = cv2.VideoCapture(0)
 video_stream()
-textwid()
+textwidget()
 root.config(menu=menubar)
 root.mainloop()
