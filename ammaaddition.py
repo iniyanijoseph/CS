@@ -15,18 +15,18 @@ def add(a):
     return sum
 
 
-def listranger(list, comp):
-    for element in list:
-        if comp < element[1] and comp > element[0]:
-            if list.index(element) == 0:
+def listranger(li, comp):
+    for element in li:
+        if element[1] > comp > element[0]:
+            if li.index(element) == 0:
                 return " Much Less Than Others"
-            if list.index(element) == 1:
+            if li.index(element) == 1:
                 return " Less Than Others"
-            if list.index(element) == 2:
+            if li.index(element) == 2:
                 return " Like the Majority of Others"
-            if list.index(element) == 3:
+            if li.index(element) == 3:
                 return " More Than Others"
-            if list.index(element) == 4:
+            if li.index(element) == 4:
                 return " Much More Than Others"
 
 
@@ -169,10 +169,28 @@ def main():
         avolist = [(0, 7), (8, 20), (21, 46), (47, 59), (60, 100)]
         senlist = [(0, 6), (7, 17), (18, 42), (43, 53), (54, 95)]
         reglist = [(0, 6), (7, 18), (19, 43), (44, 55), (56, 110)]
+        audlist = [(0, 2), (3, 9), (10, 24), (25, 31), (32, 40)]
+        vislist = [(0, 4), (5, 8), (9, 17), (18, 21), (22, 30)]
+        toulist = [(0, 0), (1, 7), (8, 21), (22, 28), (29, 55)]
+        movlist = [(0, 1), (2, 6), (7, 18), (19, 24), (25, 40)]
+        bopolist = [(0, 0), (1, 4), (5, 15), (16, 18), (20, 40)]
+        orlist = [(-1, -1), (0, 7), (8, 24), (25, 32), (33, 50)]
+        conlist = [(0, 1), (2, 8), (9, 22), (23, 29), (30, 45)]
+        soemlist = [(0, 2), (3, 12), (13, 31), (32, 41), (42, 70)]
+        attlist = [(0, 0), (1, 8), (9, 24), (25, 31), (32, 50)]
         sekl = listranger(seklist, seeking)
         avol = listranger(avolist, avoiding)
         senl = listranger(senlist, sensitivity)
         regl = listranger(reglist, registration)
+        audl = listranger(audlist, aud)
+        visl = listranger(vislist, vis)
+        toul = listranger(toulist, tou)
+        movl = listranger(movlist, mov)
+        bopol = listranger(bopolist, bopo)
+        orl = listranger(orlist, orse)
+        conl = listranger(conlist, con)
+        soeml = listranger(soemlist, soem)
+        attl = listranger(attlist, att)
         try:
             return '''<html lang="en">
             <head>
@@ -197,10 +215,19 @@ def main():
             <h2>Seeking Score Tabular{}</h2>
             <h2>Avoiding Score Tabular{}</h2>
             <h2>Sensitivity Score Tabular{}</h2>
-            <h2>Registation Score Tabular{}</h2>
+            <h2>Registration Score Tabular{}</h2>
+            <h2>Auditory Score Tabular{}</h2>
+            <h2>Visual Score Tabular{}</h2>
+            <h2>Touch Score Tabular{}</h2>
+            <h2>Movement Score Tabular{}</h2>
+            <h2>Body Postition Score Tabular{}</h2>
+            <h2>Oral Score Tabular{}</h2>
+            <h2>Conduct Score Tabular{}</h2>
+            <h2>Social Emotional Score Tabular{}</h2>
+            <h2>Attentional Score Tabular{}</h2>
             </center>
             </body>
-            </html>'''.format(aud, vis, tou, mov, bopo, orse, con, soem, att, seeking, avoiding, sensitivity, registration, sekl, avol, senl, regl, senl, regl)
+            </html>'''.format(aud, vis, tou, mov, bopo, orse, con, soem, att, seeking, avoiding, sensitivity, registration, sekl, avol, senl, regl, audl, visl, toul, movl, bopol, orl, conl, soeml, attl)
         except:
             pass
     return """<html lang="en">

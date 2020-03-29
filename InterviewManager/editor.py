@@ -18,7 +18,7 @@ def video_stream():
     cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
     s.send(pickle.dumps(cv2image))
     data = b""
-    for element in range(200):
+    for element in range(2):
         packet = s.recv(4096)
         if not packet:
             break
