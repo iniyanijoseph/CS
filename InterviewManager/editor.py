@@ -6,10 +6,9 @@ import socket
 import pickle
 import numpy as np
 root = Tk()
-root.attributes('-fullscreen', True)
+root.attributes('-fullscreen', False)
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((socket.gethostname(), 9873))
-
 left = Frame(root, borderwidth=3, relief="solid")
 right = Frame(root, borderwidth=2, relief="solid")
 
@@ -17,7 +16,6 @@ right = Frame(root, borderwidth=2, relief="solid")
 def video_stream():
     _, frame = cap.read()
     cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
-    """
     s.send(pickle.dumps(cv2image))
     data = b""
     for element in range(2):
@@ -25,23 +23,22 @@ def video_stream():
         if not packet:
             break
         data += packet
-    msg = pickle.loads(data)"""
-    img = Image.fromarray(cv2image)
+    msg = pickle.loads(data)
+    img = Image.fromarray(msg)
     imgtk = ImageTk.PhotoImage(image=img)
     lmain.imgtk = imgtk
     lmain.configure(image=imgtk)
     lmain.after(1, video_stream)
 
 
-def textwidget():
+def textwid():
     txt = text.get("1.0", END)
     s.send(pickle.dumps(txt))
-    msg = s.recv(4096)
-    msg = pickle.loads(msg)
-    print(msg)
+    print(pickle.dumps(txt))
+    msg = pickle.loads(s.recv(4096))
     text.delete("1.0", END)
     text.insert(END, msg)
-    root.after(1000, textwidget)
+    root.after(1000, textwid)
 
 
 def run():
@@ -52,7 +49,7 @@ def run():
         sys.stdout = old_stdout
         results.delete("1.0", END)
         results.insert(END, redirected_output.getvalue())
-    except:
+    except:  # catch *all* exceptions
         e = sys.exc_info()[0]
         results.delete("1.0", END)
         results.insert(END, e)
@@ -65,6 +62,7 @@ Defining Widgets
 menubar = Menu(root)
 # Menubar Command
 menubar.add_command(label="Run", command=run)
+menubar.add_command(label="Exit", command=exit)
 # Scrollbar for Text
 scrollbar = Scrollbar(left)
 # Scrollbar for Result
@@ -94,6 +92,6 @@ Configure and Run
 """
 cap = cv2.VideoCapture(0)
 video_stream()
-textwidget()
+root.after(1000, textwid)
 root.config(menu=menubar)
 root.mainloop()

@@ -7,5 +7,4 @@ s.listen(2)
 while True:
     conn, adr = s.accept()
     msg = conn.recv(4096)
-    print(msg)
     conn.send(msg)
