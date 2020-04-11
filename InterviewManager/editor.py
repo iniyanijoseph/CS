@@ -4,25 +4,32 @@ from PIL import ImageTk, Image
 import io
 import socket
 import pickle
-import numpy as np
 root = Tk()
 root.attributes('-fullscreen', False)
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((socket.gethostname(), 9873))
 left = Frame(root, borderwidth=3, relief="solid")
 right = Frame(root, borderwidth=2, relief="solid")
-
+"""
+# Audio
+CHUNK = 1024 * 4
+FORMAT = pyaudio.paInt16
+CHANNELS = 2
+RATE = 44100
+p = pyaudio.PyAudio()
+stream = p.open(format=FORMAT, channels=CHANNELS, rate=RATE, input=True, frames_per_buffer=CHUNK)
+"""
 
 def video_stream():
     _, frame = cap.read()
     cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
-    s.send(pickle.dumps(cv2image))
+    s.sendall(pickle.dumps(cv2image))
     data = b""
-    for element in range(2):
+    for element in range(10000):
         packet = s.recv(4096)
+        data += packet
         if not packet:
             break
-        data += packet
     msg = pickle.loads(data)
     img = Image.fromarray(msg)
     imgtk = ImageTk.PhotoImage(image=img)
@@ -92,6 +99,7 @@ Configure and Run
 """
 cap = cv2.VideoCapture(0)
 video_stream()
-root.after(1000, textwid)
+textwid()
 root.config(menu=menubar)
 root.mainloop()
+exit()

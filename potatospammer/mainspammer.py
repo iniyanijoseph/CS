@@ -15,9 +15,7 @@ def paste(joined):
 while True:
     while len(thing) <= 30:
         thing.insert(0, " ")
-        paste(joined.join(thing))
+        paste(joined.join(thing))asdfa;slkfjdflksf;aalskdfjalk
     while len(thing)>len(bored):
         thing.pop(0)
         paste(joined.join(thing))
-"""
-"""

@@ -24,13 +24,15 @@ Algorithm:
 //Variables---------------------------------------------
 int speed = 70; // speed of motors
 //Functions---------------------------------------------
-void fudful(); // function declaration for forward until dark and forward until light
-void back(); // function declaration for back until start
-void switchfunction(int num); //Function for switch statement to execute fudful & back
+void fudful(); //forward until dark and forward until light
+void back(); // back until start
+void switchfunction(int num); //switch statement to execute fudful & back
 
 task main()
 {
-	switchfunction(1);//Call switch function
+	switchfunction(3);//switch function
+	switchfunction(2);//switch function
+	switchfunction(1);//switch function
 }
 //------------------------------------------------------
 void fudful()//Forward until dark forward until light
@@ -56,21 +58,20 @@ void back()//Go back to start
 	}
 }
 
-void switchfunction(int num)//Function containing
+void switchfunction(int num)//Function containing switch statement
 {
 	switch(num)//Switch Statement
 	{
 		case 1://First Case
-			fudful();//Call forward until dark/light function
-			back();//Call back to start function
+			fudful();//forward until dark
+							 //forward until light
 		case 2://Second Case
-			fudful();//Call forward until dark/light function
-			fudful();//Call forward until dark/light function
-			back();//Call back to start function
+			fudful();//forward until dark
+							 //forward until light
 		case 3://Third Case
-			fudful();//Call forward until dark/light function
-			fudful();//Call forward until dark/light function
-			fudful();//Call forward until dark/light function
-			back();	//Call back to start function
+			fudful();//forward until dark
+							 //forward until light
+			back();//back to start
+
 	}
 }
