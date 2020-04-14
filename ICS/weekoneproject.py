@@ -1,6 +1,6 @@
-import turtle
+from turtle import *
 import random
-bot = turtle.Turtle()
+bot = Turtle()
 bot.speed(-1)
 bot.color("red")
 bot.fillcolor("blue")
