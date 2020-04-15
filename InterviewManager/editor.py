@@ -4,10 +4,11 @@ from PIL import ImageTk, Image
 import io
 import socket
 import pickle
+import sys
 root = Tk()
 root.attributes('-fullscreen', True)
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect((socket.gethostname(), 65535))
+s.connect((socket.gethostname(), 65533))
 
 left = Frame(root, borderwidth=3, relief="solid")
 right = Frame(root, borderwidth=2, relief="solid")
@@ -17,28 +18,29 @@ def video_stream():
     _, frame = cap.read()
     cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
     s.sendall(pickle.dumps(cv2image))
-    data = b""
+    msg = b""
     while True:
         packet = s.recv(4096)
-        if not packet:
+        print(packet)
+        if sys.getsizeof(packet) < 4096:
+            print("wassap")
             break
-        data += packet
-    msg = pickle.loads(data)
-    print(msg)
-    img = Image.fromarray(msg)
+        msg += packet
+    data = pickle.loads(msg)
+    img = Image.fromarray(data)
     imgtk = ImageTk.PhotoImage(image=img)
     lmain.imgtk = imgtk
     lmain.configure(image=imgtk)
     lmain.after(1, video_stream)
 
 
-def textwid():
+def textwidget():
     txt = text.get("1.0", END)
     s.send(pickle.dumps(txt))
     msg = pickle.loads(s.recv(4096))
     text.delete("1.0", END)
     text.insert(END, msg)
-    root.after(1000, textwid)
+    root.after(1000, textwidget)
 
 
 def run():
@@ -49,28 +51,23 @@ def run():
         sys.stdout = old_stdout
         results.delete("1.0", END)
         results.insert(END, redirected_output.getvalue())
-    except:
-        e = sys.exc_info()[0]
+    except Exception as e:
+        results.config(state=NORMAL)
         results.delete("1.0", END)
         results.insert(END, e)
+        results.config(state=DISABLED)
 
 
 """
 Defining Widgets
 """
-# MenuBar
 menubar = Menu(root)
-# Menubar Command
 menubar.add_command(label="Run", command=run)
-# Scrollbar for Text
 scrollbar = Scrollbar(left)
-# Scrollbar for Result
 resscrollbar = Scrollbar(right)
-# Text for writing in
 text = Text(left, yscrollcommand=scrollbar.set, height="400")
-# Text for Results
 results = Text(right, yscrollcommand=resscrollbar.set, height="200")
-# Video Input/Output
+results.config(state=DISABLED)
 lmain = Label(right)
 
 """
@@ -91,10 +88,11 @@ Configure and Run
 """
 cap = cv2.VideoCapture(0)
 video_stream()
-textwid()
+textwidget()
 root.config(menu=menubar)
 root.mainloop()
 
 """
-OSError: [WinError 10057]
+packet = s.recv(1)
+ConnectionResetError: [WinError 10054] An existing connection was forcibly closed by the remote host
 """
