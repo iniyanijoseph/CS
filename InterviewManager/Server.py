@@ -1,41 +1,15 @@
 import socket
 import sys
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.bind((socket.gethostname(), 65533))
-s.listen(10)
+s.bind((socket.gethostname(), 65527))
+s.listen(100)
 
 while True:
     conn, adr = s.accept()
     msg = b""
-    while True:
-        packet = conn.recv(4093)
-        print(packet)
-        if sys.getsizeof(packet) < 4096:
-            print("wassap")
-            break
+    packet = conn.recv(4096)
+    while sys.getsizeof(packet) > 4000:
         msg += packet
+        packet = conn.recv(4096)
+    msg += packet
     conn.sendall(msg)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

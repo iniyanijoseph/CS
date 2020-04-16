@@ -8,7 +8,7 @@ import sys
 root = Tk()
 root.attributes('-fullscreen', True)
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect((socket.gethostname(), 65533))
+s.connect((socket.gethostname(), 65527))
 
 left = Frame(root, borderwidth=3, relief="solid")
 right = Frame(root, borderwidth=2, relief="solid")
@@ -19,13 +19,11 @@ def video_stream():
     cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
     s.sendall(pickle.dumps(cv2image))
     msg = b""
-    while True:
-        packet = s.recv(4096)
-        print(packet)
-        if sys.getsizeof(packet) < 4096:
-            print("wassap")
-            break
+    packet = s.recv(4096)
+    while sys.getsizeof(packet) > 4000:
         msg += packet
+        packet = s.recv(4096)
+    msg += packet
     data = pickle.loads(msg)
     img = Image.fromarray(data)
     imgtk = ImageTk.PhotoImage(image=img)
