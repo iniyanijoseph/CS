@@ -29,7 +29,8 @@ def video_stream():
     imgtk = ImageTk.PhotoImage(image=img)
     lmain.imgtk = imgtk
     lmain.configure(image=imgtk)
-    lmain.after(1, video_stream)
+    print("helo")
+    root.after(2, video_stream)
 
 
 def textwidget():
@@ -38,7 +39,7 @@ def textwidget():
     msg = pickle.loads(s.recv(4096))
     text.delete("1.0", END)
     text.insert(END, msg)
-    root.after(1000, textwidget)
+    root.after(2, textwidget)
 
 
 def run():
@@ -85,12 +86,7 @@ results.pack()
 Configure and Run
 """
 cap = cv2.VideoCapture(0)
-video_stream()
-textwidget()
+root.after(2, video_stream)
+root.after(2, textwidget)
 root.config(menu=menubar)
 root.mainloop()
-
-"""
-packet = s.recv(1)
-ConnectionResetError: [WinError 10054] An existing connection was forcibly closed by the remote host
-"""
