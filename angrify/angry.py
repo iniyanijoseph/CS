@@ -1,5 +1,4 @@
 import pygame
-import keyboard
 pygame.init()
 win = pygame.display.set_mode((500,300))
 pygame.display.set_caption("ANGRY")
@@ -18,8 +17,8 @@ while run:
     if keys[pygame.K_SPACE]:
         pic += 1
     
-    win.fill((255,255,255))
+    win.fill((255, 255, 255))
     win.blit(pygame.image.load(body[pic]), (0, 0)) 
     pygame.display.update()
 
-pygame.quit()    
+pygame.quit()
