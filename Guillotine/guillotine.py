@@ -16,6 +16,7 @@ all_fonts = pygame.font.get_fonts()
 font = pygame.font.Font("C:\Windows\Fonts\Arial.ttf", 25)
 wordlist = RandomWords()
 wronglet = []
+print(wordlist)
 word = wordlist.get_random_word()
 objectlist = []
 displaytext = ""

@@ -1,6 +1,5 @@
 import pygame
 import random
-name = input("What is Up?")
 pygame.init()
 
 win = pygame.display.set_mode((280, 400))
