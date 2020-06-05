@@ -68,8 +68,8 @@ def newclass():
         filename = f"{classtitle}.py"
         subprocess.Popen([programname, filename])
 
-    with open(f"{classtitle}.py", "w") as fg:
-        fg.write(classtemplate)
+    with open(f"{classtitle}.py", "w") as FILE:
+        FILE.write(classtemplate)
         if f"{classtitle}.py" not in classes:
             givenclasses = Button(
                 uiside,
