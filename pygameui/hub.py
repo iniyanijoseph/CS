@@ -4,7 +4,6 @@ from tkinter import messagebox
 import os
 import subprocess
 
-templatestring = """"""
 with open("maininterface.py", "r") as FILE:
     templatestring = FILE.read()
 projects = []
@@ -35,7 +34,7 @@ def newproject():
                 givenclasses.pack(fill=X)
                 projects.append(projectname)
 
-        except Exception as e:
+        except Exception:
             messagebox.showerror("PROJECTNAME ALREADY EXISTS", "CHOOSE DIFFERENT NAME. PROJECT ALREADY EXISTS")
 
 
