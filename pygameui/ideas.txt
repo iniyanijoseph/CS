@@ -1,4 +1,0 @@
-Have button for new sprite object. + sign leading to searchbar where can edit the class.
-    - Collision
-    - New script = new class where check boxes can add new buttons
-	- Pyganim Support?

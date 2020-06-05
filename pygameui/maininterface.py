@@ -1,15 +1,10 @@
-import pygame
 from tkinter import *
 from tkinter import colorchooser
-import os
 from tkinter import simpledialog
 import subprocess
 
 bgc = (255, 255, 255)
 title = "Pygame Project"
-global objectlist
-global classtitle
-global classtemplate
 objectlist = """
 """
 mainlooptext = """allobjects.update()
@@ -17,8 +12,9 @@ mainlooptext = """allobjects.update()
 classes = []
 clastring = """
 """
-
 classtitle = ""
+sizing = (500, 300)
+continueupdate = True
 
 classtemplate = f"""class {classtitle}(pygame.sprite.Sprite):
 def __init__(self):
@@ -33,12 +29,23 @@ def update(self):
 
 def getcolor():
     global bgc
-    bgc = colorchooser.askcolor(color=None)[0]
+    check = colorchooser.askcolor(color=None)[0]
+    if check is not None:
+        bgc = check
 
 
 def getcaption():
     global title
-    title = simpledialog.askstring("Caption Select", "Choose a Title for a Project")
+    check = simpledialog.askstring("Caption Select", "Choose a Title for a Project")
+    if check is not None:
+        title = check
+
+
+def getsizing():
+    global sizing
+    check = simpledialog.askstring("Sizing Select", "Choose the Dimesnsions for your project")
+    if check is not None:
+        sizing = check
 
 
 def newclass():
@@ -57,42 +64,41 @@ def newclass():
 
     def launchnotepad():
         global classtitle
-        programName = "notepad.exe"
-        fileName = f"{classtitle}.py"
-        subprocess.Popen([programName, fileName])
+        programname = "notepad.exe"
+        filename = f"{classtitle}.py"
+        subprocess.Popen([programname, filename])
 
     with open(f"{classtitle}.py", "w") as fg:
         fg.write(classtemplate)
-        givenclasses = Button(uiside, text=f"Launch Notepad with {classtitle} class", command=launchnotepad)
-        givenclasses.pack(fill=X)
-        classes.append(f"{classtitle}.py")
+        if f"{classtitle}.py" not in classes:
+            givenclasses = Button(
+                uiside,
+                text=f"Launch Notepad with {classtitle} class",
+                command=launchnotepad,
+                width=35)
+            givenclasses.pack(fill=X)
+            classes.append(f"{classtitle}.py")
 
-        objectlist += f"allobjects.add({classtitle}())\n"
+            objectlist += f"""for element in range(1):
+                allobjects.add({classtitle}())\n"""
+
+
+def preview():
+    subprocess.Popen(["python", "main_script.py"])
 
 
 root = Tk()
+root.resizable(width=FALSE, height=TRUE)
 
-pgside = Frame(root, width=750, height=500, borderwidth=3, relief="solid")
-pgside.pack(side=LEFT, fill=BOTH, expand=True)
-uiside = Frame(root, width=250, height=500, borderwidth=3, relief="solid")
+uiside = Frame(root, width=250, height=250, borderwidth=3, relief="solid")
 uiside.pack(side=RIGHT, fill=BOTH, expand=True)
 
 menubar = Menu(root)
 menubar.add_command(label="ChooseBGColor", command=getcolor)
 menubar.add_command(label="ChooseTitle", command=getcaption)
+menubar.add_command(label="ChooseWindowSizing", command=getsizing)
 menubar.add_command(label="Non-Sprite Object", command=newclass)
-
-os.environ['SDL_WINDOWID'] = str(pgside.winfo_id())
-os.environ['SDL_VIDEODRIVER'] = 'windib'
-win = pygame.display.set_mode((750, 500))
-pygame.display.init()
-pygame.display.update()
-
-
-def draw():
-    win.fill(bgc)
-    pygame.draw.rect(win, (0, 0, 0), (5, 5, 10, 10))
-    pygame.display.update()
+menubar.add_command(label="Preview Pygame", command=preview)
 
 
 root.config(menu=menubar)
@@ -100,8 +106,8 @@ while True:
     writestring = f"""import pygame  # Import the module for use
 pygame.init()  # Initialize the video system for output
 
-win = pygame.display.set_mode((750, 500))  # Create a window to which we can draw onto
-configlist = {[bgc, title]}
+configlist = {[bgc, title, sizing]}
+win = pygame.display.set_mode(configlist[2])  # Create a window to which we can draw onto
 pygame.display.set_caption(configlist[1]) 
 allobjects = pygame.sprite.Group()
 
@@ -115,9 +121,10 @@ while run:
     {mainlooptext}
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            exit()
+            run = False
     pygame.display.update()
     pygame.time.delay(100)
+pygame.quit()
 """
     clastring = """"""
     for file in classes:
@@ -125,10 +132,9 @@ while run:
             contents = fg.read()
             contents += "\n"
             clastring += contents
-    with open("main_script.py", "w") as fg:
-        for line in writestring:
-            fg.write(line)
-    draw()
+    if continueupdate:
+        with open("main_script.py", "w") as fg:
+            for line in writestring:
+                fg.write(line)
     root.title(title)
-    pygame.display.update()
     root.update()
