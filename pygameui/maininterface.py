@@ -3,6 +3,7 @@ from tkinter import *
 from tkinter import colorchooser
 import os
 from tkinter import simpledialog
+import subprocess
 
 bgc = (255, 255, 255)
 title = "Pygame Project"
@@ -53,9 +54,16 @@ def newclass():
     
     def update(self):
         pass"""
+
+    def launchnotepad():
+        global classtitle
+        programName = "notepad.exe"
+        fileName = f"{classtitle}.py"
+        subprocess.Popen([programName, fileName])
+
     with open(f"{classtitle}.py", "w") as fg:
         fg.write(classtemplate)
-        givenclasses = Label(uiside, text=classtitle)
+        givenclasses = Button(uiside, text=f"Launch Notepad with {classtitle} class", command=launchnotepad)
         givenclasses.pack(fill=X)
         classes.append(f"{classtitle}.py")
 
@@ -117,7 +125,7 @@ while run:
             contents = fg.read()
             contents += "\n"
             clastring += contents
-    with open("None.py", "w") as fg:
+    with open("main_script.py", "w") as fg:
         for line in writestring:
             fg.write(line)
     draw()
