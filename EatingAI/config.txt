@@ -1,8 +1,8 @@
 [NEAT]
 fitness_criterion     = max
 fitness_threshold     = 100
-pop_size              = 20
-reset_on_extinction   = False
+pop_size              = 100
+reset_on_extinction   = True
 
 [DefaultGenome]
 # node activation options
@@ -18,8 +18,8 @@ aggregation_options     = sum
 # node bias options
 bias_init_mean          = 0.0
 bias_init_stdev         = 1.0
-bias_max_value          = 30.0
-bias_min_value          = -30.0
+bias_max_value          = 1000.0
+bias_min_value          = -1000.0
 bias_mutate_power       = 0.5
 bias_mutate_rate        = 0.7
 bias_replace_rate       = 0.1
@@ -40,8 +40,8 @@ feed_forward            = True
 initial_connection      = full
 
 # node add/remove rates
-node_add_prob           = 0.2
-node_delete_prob        = 0.2
+node_add_prob           = 1
+node_delete_prob        = 1
 
 # network parameters
 num_hidden              = 0
