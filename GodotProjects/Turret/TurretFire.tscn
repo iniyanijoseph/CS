@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://TurretFire.gd" type="Script" id=1]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 7.43369
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0.0114943, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.982759, 0.318182 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=3]
+min_value = -2.0
+_data = [ Vector2( 0.0172414, -2 ), 0.0, 0.0, 0, 0, Vector2( 1, -1.75455 ), 0.0, 0.0, 0, 0 ]
+
+[node name="TurretFire" type="KinematicBody2D" groups=[
+"EvilFire",
+]]
+collision_mask = 2147483649
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Particles2D" type="CPUParticles2D" parent="."]
+scale = Vector2( 8, 8 )
+amount = 100
+lifetime = 0.8
+speed_scale = 0.4
+randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 1.0
+gravity = Vector2( 0, -50 )
+scale_amount = 0.79
+scale_amount_curve = SubResource( 2 )
+color = Color( 1, 0, 0, 1 )
+hue_variation = -0.06
+hue_variation_curve = SubResource( 3 )

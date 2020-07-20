@@ -1,0 +1,51 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Hero.tscn" type="PackedScene" id=1]
+[ext_resource path="res://TileSet.tres" type="TileSet" id=2]
+[ext_resource path="res://Game.gd" type="Script" id=3]
+[ext_resource path="res://MouseClickParticle.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Inventory Bar.tscn" type="PackedScene" id=5]
+[ext_resource path="res://ScoreLabel.gd" type="Script" id=6]
+[ext_resource path="res://Turret.tscn" type="PackedScene" id=7]
+[ext_resource path="res://BackButton.tscn" type="PackedScene" id=8]
+
+[node name="Game" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Hero" parent="." instance=ExtResource( 1 )]
+position = Vector2( 134.055, 102.146 )
+
+[node name="ScoreLabel" type="Label" parent="Hero"]
+anchor_bottom = 0.269
+margin_left = -6.59395
+margin_top = 3.64178
+margin_right = 1.40605
+margin_bottom = 17.6418
+rect_scale = Vector2( 2, 2 )
+size_flags_stretch_ratio = 0.0
+text = "0"
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TileMap" type="TileMap" parent="."]
+show_behind_parent = true
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 28, 28 )
+format = 1
+tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, 12, 0, 0, 13, 0, 0, 14, 0, 0, 15, 0, 0, 16, 0, 0, 17, 0, 0, 18, 0, 0, 19, 0, 0, 20, 0, 0, 21, 0, 0, 22, 0, 0, 23, 0, 0, 24, 0, 0, 25, 0, 0, 26, 0, 0, 27, 0, 0, 28, 0, 0, 29, 0, 0, 30, 0, 0, 31, 0, 0, 32, 0, 0, 33, 0, 0, 34, 0, 0, 35, 0, 0, 36, 0, 0, 37, 0, 0, 38, 0, 0, 39, 0, 0, 40, 0, 0, 41, 0, 0, 42, 0, 0, 43, 0, 0, 44, 0, 0, 45, 0, 0, 65536, 0, 0, 65537, 3, 0, 65545, 3, 0, 65546, 3, 0, 65555, 3, 0, 65564, 3, 0, 65572, 3, 0, 65581, 0, 0, 131072, 0, 0, 131117, 0, 0, 196608, 0, 0, 196625, 3, 0, 196637, 3, 0, 196653, 0, 0, 262144, 0, 0, 262148, 3, 0, 262167, 1, 0, 262189, 0, 0, 327680, 0, 0, 327694, 1, 0, 327725, 0, 0, 393216, 0, 0, 393261, 0, 0, 458752, 0, 0, 458780, 1, 0, 458797, 0, 0, 524288, 0, 0, 524289, 3, 0, 524298, 3, 0, 524319, 3, 0, 524326, 1, 0, 524333, 0, 0, 589824, 0, 0, 589869, 0, 0, 655360, 0, 0, 655361, 3, 0, 655370, 3, 0, 655379, 3, 0, 655388, 3, 0, 655397, 3, 0, 655405, 0, 0, 720896, 0, 0, 720897, 3, 0, 720902, 1, 0, 720908, 3, 0, 720941, 0, 0, 786432, 0, 0, 786477, 0, 0, 851968, 0, 0, 851969, 3, 0, 851978, 3, 0, 851984, 1, 0, 851987, 3, 0, 851996, 3, 0, 852005, 3, 0, 852013, 0, 0, 917504, 0, 0, 917549, 0, 0, 983040, 0, 0, 983074, 1, 0, 983085, 0, 0, 1048576, 0, 0, 1048601, 1, 0, 1048621, 0, 0, 1114112, 0, 0, 1114157, 0, 0, 1179648, 0, 0, 1179693, 0, 0, 1245184, 0, 0, 1245229, 0, 0, 1310720, 0, 0, 1310765, 0, 0, 1376256, 0, 0, 1376301, 0, 0, 1441792, 0, 0, 1441793, 0, 0, 1441794, 0, 0, 1441795, 0, 0, 1441796, 0, 0, 1441797, 0, 0, 1441798, 0, 0, 1441799, 0, 0, 1441800, 0, 0, 1441801, 0, 0, 1441802, 0, 0, 1441803, 0, 0, 1441804, 0, 0, 1441805, 0, 0, 1441806, 0, 0, 1441807, 0, 0, 1441808, 0, 0, 1441809, 0, 0, 1441810, 0, 0, 1441811, 0, 0, 1441812, 0, 0, 1441813, 0, 0, 1441814, 0, 0, 1441815, 0, 0, 1441816, 0, 0, 1441817, 0, 0, 1441818, 0, 0, 1441819, 0, 0, 1441820, 0, 0, 1441821, 0, 0, 1441822, 0, 0, 1441823, 0, 0, 1441824, 0, 0, 1441825, 0, 0, 1441826, 0, 0, 1441827, 0, 0, 1441828, 0, 0, 1441829, 0, 0, 1441830, 0, 0, 1441831, 0, 0, 1441832, 0, 0, 1441833, 0, 0, 1441834, 0, 0, 1441835, 0, 0, 1441836, 0, 0, 1441837, 0, 0 )
+
+[node name="Inventory Bar" parent="." instance=ExtResource( 5 )]
+position = Vector2( 669.804, 522.416 )
+
+[node name="MouseClickParticle" parent="." instance=ExtResource( 4 )]
+
+[node name="Turret" parent="." instance=ExtResource( 7 )]
+position = Vector2( 650.178, 328.858 )
+
+[node name="Button" parent="." instance=ExtResource( 8 )]
+margin_left = 1163.0
+margin_top = 595.0
+margin_right = 1257.0
+margin_bottom = 615.0

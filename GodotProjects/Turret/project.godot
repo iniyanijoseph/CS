@@ -1,0 +1,34 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[  ]
+_global_script_class_icons={
+
+}
+
+[application]
+
+config/name="Turret"
+run/main_scene="res://HomePage.tscn"
+config/icon="res://Hero.png"
+
+[display]
+
+mouse_cursor/custom_image="res://Mouse.png"
+
+[network]
+
+limits/default_environment="res://default_env.tres"
+
+[rendering]
+
+quality/driver/driver_name="GLES2"
+environment/default_clear_color=Color( 0.227451, 0.227451, 0.227451, 1 )
+environment/default_environment="res://default_env.tres"

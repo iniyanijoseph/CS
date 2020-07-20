@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://MouseClickParticle.gd" type="Script" id=1]
+
+[sub_resource type="Curve" id=1]
+min_value = -1.0
+_data = [ Vector2( 0, 0.0363637 ), 0.0, 0.0, 0, 0, Vector2( 1, -0.145455 ), 0.0, 0.0, 0, 0 ]
+
+[node name="MouseClickParticle" type="CPUParticles2D"]
+position = Vector2( -121.3, 1.18896 )
+amount = 17
+randomness = 0.59
+emission_shape = 1
+emission_sphere_radius = 20.27
+gravity = Vector2( 0, 100 )
+scale_amount = 3.0
+color = Color( 0.0313726, 0.796078, 0.690196, 1 )
+hue_variation_curve = SubResource( 1 )
+script = ExtResource( 1 )

@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Octopus.gd" type="Script" id=1]
+[ext_resource path="res://Submarine-1.png.png" type="Texture" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 14.9276
+
+[node name="Octopus" type="KinematicBody2D" groups=[
+"Octopi",
+]]
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 2.32187
+shape = SubResource( 1 )
+
+[node name="Projection" type="Sprite" parent="."]
+scale = Vector2( 0.02, 0.02 )
+texture = ExtResource( 2 )
+
+[node name="TextureButton" type="TextureButton" parent="."]
+margin_left = -21.0331
+margin_top = -15.5764
+margin_right = 18.9669
+margin_bottom = 24.4236
+__meta__ = {
+"_edit_use_anchors_": false
+}

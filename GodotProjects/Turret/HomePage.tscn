@@ -1,0 +1,94 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://MouseClickParticle.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Wand.png" type="Texture" id=2]
+[ext_resource path="res://StartGame.gd" type="Script" id=3]
+[ext_resource path="res://title.png" type="Texture" id=4]
+[ext_resource path="res://Play.png" type="Texture" id=5]
+[ext_resource path="res://Tutorial.png" type="Texture" id=6]
+[ext_resource path="res://Tutorial Button.gd" type="Script" id=7]
+[ext_resource path="res://RandomExample.tscn" type="PackedScene" id=8]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.627273 ), 0.0, 0.0, 0, 0 ]
+
+[node name="HomePage" type="Node2D"]
+
+[node name="MouseClickParticle" parent="." instance=ExtResource( 1 )]
+position = Vector2( -101.141, -0.0709583 )
+color = Color( 0.0313726, 0.796078, 0.0784314, 1 )
+
+[node name="Play Button" type="Button" parent="."]
+margin_left = 434.0
+margin_top = 336.0
+margin_right = 558.0
+margin_bottom = 369.0
+custom_styles/pressed = SubResource( 1 )
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+icon = ExtResource( 5 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tutorial Button" type="Button" parent="."]
+margin_left = 434.0
+margin_top = 383.0
+margin_right = 661.0
+margin_bottom = 429.0
+custom_styles/pressed = SubResource( 1 )
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+icon = ExtResource( 6 )
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Wand" type="Sprite" parent="."]
+position = Vector2( 368.046, 371.885 )
+rotation = 0.785398
+texture = ExtResource( 2 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Wand"]
+position = Vector2( 1.39282, -23.4043 )
+rotation = 3.91826
+amount = 10
+emission_shape = 2
+emission_rect_extents = Vector2( 7, 7 )
+scale_amount = 3.42
+scale_amount_random = 0.38
+scale_amount_curve = SubResource( 2 )
+color = Color( 0.478431, 1, 0, 1 )
+
+[node name="Wand2" type="Sprite" parent="."]
+position = Vector2( 365.924, 427.746 )
+rotation = 0.785398
+texture = ExtResource( 2 )
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="Wand2"]
+position = Vector2( -1.48505, -24.1241 )
+rotation = -2.36492
+amount = 10
+emission_shape = 2
+emission_rect_extents = Vector2( 7, 7 )
+scale_amount = 3.42
+scale_amount_random = 0.38
+scale_amount_curve = SubResource( 2 )
+color = Color( 0.478431, 1, 0, 1 )
+
+[node name="title" type="Sprite" parent="."]
+position = Vector2( 488.784, 213.67 )
+scale = Vector2( 2.5, 2.5 )
+texture = ExtResource( 4 )
+
+[node name="KinematicBody2D" parent="." instance=ExtResource( 8 )]
+position = Vector2( 122.663, 140.609 )

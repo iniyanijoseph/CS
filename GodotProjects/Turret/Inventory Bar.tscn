@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://InventoryBar.png" type="Texture" id=1]
+[ext_resource path="res://Inventory Bar.gd" type="Script" id=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.0196078, 0.976471, 0.662745, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.414063, 0.0452881, 0.0452881, 1 )
+
+[node name="Inventory Bar" type="Sprite"]
+position = Vector2( -2.10223, 0 )
+scale = Vector2( 3.5, 2 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="FireProgress" type="ProgressBar" parent="."]
+margin_left = -28.0
+margin_top = 14.0
+margin_right = 56.0
+margin_bottom = 43.0
+rect_scale = Vector2( 0.25, 0.25 )
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MeleeProgress" type="ProgressBar" parent="."]
+margin_left = 0.361753
+margin_top = 13.8204
+margin_right = 84.3618
+margin_bottom = 42.8204
+rect_scale = Vector2( 0.25, 0.25 )
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
