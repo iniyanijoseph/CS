@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Ceaser Code Encrypter</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("#2").click(function(){
+    $("input:text").val("title");
+  });
+});
+</script>
+</head>
+<body bgcolor="#3dccc2"> 
+<center>
+<h1 style="color:blue;">Online PDF Library</h1>
+<h2 style="color:blue;">Read our books FREE!</h2>
+<input id="hi" />
+<p></p>
+<button style="color:blue;" id="give">Press To Search</button>
+<p style="color:blue;">Templates</p>
+<button style="color:blue;" id="2">Press To get Template</button>
+<p></p>
+<p style="color:blue;">RESULT</p>
+<table id="booklist" style="color:blue"></table>
+</center>
+<script>
+$(document).ready(function(){
+  $("#give").click(function(){
+    search();
+  })
+}
+)
+function search(){
+	$( "#booklist" ).empty();
+    var nums = $("#hi").val();
+    var saveData = $.ajax({
+      type:"POST",
+      url:"/sqllibra",
+      data: '{"a":"'+nums+'"}',
+      dataType: "json",
+      contentType:"application/json",
+	  error: function (xhr, ajaxOptions, thrownError) {
+        alert(xhr.status);
+        alert(thrownError);
+      },
+	  
+      success: function(resultData) {
+        console.log(resultData);
+		resultData.forEach(function(entry) {
+		  var entries = entry.split(",");
+            $("<tr><td><a href='"+entries[0]+"' id=btn"+entries[1]+">" + entries[0] + "</a></td><td><button onclick='javascript:deleteitem("+entries[1]+")'>DELETE ITEM</button></td></tr>")
+			.appendTo("#booklist");
+		  
+		});  
+      },
+    });
+}
+
+function deleteitem(bookid) {
+
+  var saveData = $.ajax({
+	type:"POST",
+	url:"/delete",
+	data: '{"a":"'+bookid+'"}',
+	dataType: "json",
+	contentType:"application/json",
+  });
+  search();
+}
+
+</script>
+</body>
+</html>

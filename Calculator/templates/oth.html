@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Linear Equation Calculator</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("#3").click(function(){
+    $("input:text").val("x,y,z,co;x,y,z,co;x,y,z,co");
+  });
+});
+$(document).ready(function(){
+  $("#2").click(function(){
+    $("input:text").val("x,y,co;x,y,co");
+  });
+});
+</script>
+</head>
+<body bgcolor="#3dccc2"> 
+<center>
+<h1 style="color:blue;">Linear Equation Solver</h1>
+<h2 style="color:blue;">Solve ANY Matrix Equation</h2>
+<input id="hi" />
+<p></p>
+<button style="color:blue;" id="give">Press To Solve Matrix</button>
+<br/>
+<br/>
+<table border=1 width=100%><tr><td></td></tr></table>
+
+<p style="color:blue;">Templates</p>
+<button style="color:blue;" id="2">Press To get 2*2 Matrix Template</button>
+<p></p>
+<button style="color:blue;" id="3">Press To get 3*3 Matrix Template</button>
+<p style="color:blue;">RESULT</p>
+<table id="good" style="color:blue"></table>
+<p style="color:blue;">If Result Shows Up As 0: No Solution</p>
+<p style="color:blue;">If Result Shows Up As 1: Infinite Solutions</p>
+</center>
+<script>
+$(document).ready(function(){
+  $("#give").click(function(){
+    $( "#good" ).empty();
+    var linereq = $("#hi").val();
+    var saveData = $.ajax({
+      type:"POST",
+      url:"/calc",
+      data: '{"a":"'+linereq+'"}',
+      dataType: "json",
+      contentType:"application/json",
+      success: function(resultData) {
+        console.log('Executed');
+        if (resultData !== "[0]" && resultData !== "[1]") {
+          resultData.forEach(function(entry) {
+            $("<tr><td>" + entry + "</td></tr>").appendTo("#good");
+          });
+	} else if(resultData === "[0]"){
+            $("<tr><td>No Solution</td></tr>").appendTo("#good");
+        } else if(resultData === "[1]"){
+            $("<tr><td>Infinite Solutions</td></tr>").appendTo("#good");
+        }
+        
+      
+      },
+
+    });
+  })
+}
+)
+</script>
+</body>
+</html>

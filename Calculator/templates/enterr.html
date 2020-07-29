@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Ceaser Code Encrypter</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("#2").click(function(){
+    $("input:text").val("title,url");
+  });
+});
+</script>
+</head>
+<body bgcolor="#3dccc2"> 
+<center>
+<h1 style="color:blue;">Online PDF Library Entry Site</h1>
+
+book title <input id="title" /><br/>
+book url <input id="bookurl" /><br/>
+<p></p>
+<button style="color:blue;" id="give">Press To Add Record</button>
+<p style="color:blue;">Templates</p>
+<button style="color:blue;" id="2">Press To get Template</button>
+<p></p>
+<p style="color:blue;">RESULT</p>
+<table id="good" style="color:blue"></table>
+</center>
+<script>
+$(document).ready(function(){
+  $("#give").click(function(){
+    $( "#good" ).empty();
+    var titles = $("#title").val();
+	var bookurls = $("#bookurl").val();
+    var saveData = $.ajax({
+      type:"POST",
+      url:"/input",
+      data: '{"a":"'+titles+','+ bookurls +'"}',
+      dataType: "json",
+      contentType:"application/json",
+	  error: function (xhr, ajaxOptions, thrownError) {
+        alert(xhr.status);
+        alert(thrownError);
+      },
+      success: function(resultData) {
+		console.log(resultData);
+		if(resultData == "No Entries"){
+		$("<tr><td>"+ resultData+"</td></tr>").appendTo("#good");
+		$("<tr><td><button id='delete'>Delete Record</button></td></tr>").appendTo("#good");
+		$("#delete").click(function(){
+			  var saveData = $.ajax({
+				type:"POST",
+				url:"/delete",
+				data: '{"a":"'+resultData+'"}',
+				dataType: "json",
+				contentType:"application/json"
+			  });
+		  });
+		}else{
+		  $("<tr><td>No Entries</td></tr>").appendTo("#good");
+		}
+        } 
+      });
+    });
+  });
+
+
+</script>
+</body>
+</html>

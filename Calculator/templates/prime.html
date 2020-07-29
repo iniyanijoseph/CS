@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Prime Factors Calculator</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body bgcolor="#3dccc2"> 
+<center>
+<h1 style="color:blue;">Prime Factors Calculator</h1>
+<h2 style="color:blue;">Factor ANY Number</h2>
+<input id="hi" />
+<p></p>
+<button style="color:blue;" id="give">Press To Factorize</button>
+<br/>
+<br/>
+<p style="color:blue;">RESULT</p>
+<table id="good" style="color:blue"></table>
+</center>
+<script>
+$(document).ready(function(){
+  $("#give").click(function(){
+    $( "#good" ).empty();
+    var linereq = $("#hi").val();
+    var saveData = $.ajax({
+      type:"POST",
+      url:"/primes",
+      data: '{"a":"'+linereq+'"}',
+      dataType: "json",
+      contentType:"application/json",
+      success: function(resultData) {
+        console.log('Executed');
+        resultData.forEach(function(entry) {
+          $("<tr><td>" + entry + "</td></tr>").appendTo("#good");
+        }); 
+      },
+      error: function(e){
+        console.log(e)
+      }
+
+    });
+  })
+}
+)
+</script>
+</body>
+</html>

@@ -12,5 +12,8 @@ func _process(delta):
 	collisions = move_and_collide(velocity*delta/2)
 	if collisions:
 		radarmap.health -= 0.05
+	if get_node("Button").pressed:
+		queue_free()
+		radarmap.score += 1
 
 

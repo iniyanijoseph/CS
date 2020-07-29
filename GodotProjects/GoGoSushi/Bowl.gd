@@ -13,11 +13,8 @@ func _process(_delta):
 	if score > 100:
 		score = 0
 		level += 1
-	if level == 0:
-		get_tree().quit()
 	if score < 0:
-		level -= 1
-		score = 99
+		get_tree().quit()
 		
 	get_parent().get_node("ProgressBar").value = score
 	get_parent().get_node("Label").text = str(level)+":"+str(int(score))

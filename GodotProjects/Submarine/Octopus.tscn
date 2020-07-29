@@ -19,11 +19,11 @@ shape = SubResource( 1 )
 scale = Vector2( 0.02, 0.02 )
 texture = ExtResource( 2 )
 
-[node name="TextureButton" type="TextureButton" parent="."]
-margin_left = -21.0331
-margin_top = -15.5764
-margin_right = 18.9669
-margin_bottom = 24.4236
+[node name="Button" type="Button" parent="."]
+margin_left = -21.0
+margin_top = -20.0
+margin_right = 21.0
+margin_bottom = 20.0
 __meta__ = {
 "_edit_use_anchors_": false
 }

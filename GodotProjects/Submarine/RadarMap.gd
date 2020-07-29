@@ -3,6 +3,7 @@ extends MarginContainer
 var zoom = 1.5
 var screensize = OS.window_size
 var health = 100
+var score = 0
 
 var projections = {}
 onready var octopi = get_tree().get_nodes_in_group("Octopi")
@@ -23,3 +24,4 @@ func _process(_delta):
 			add_child(new_projection)
 			new_projection.show()
 			projections[item] = new_projection
+
