@@ -1,0 +1,96 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://StartPage.png" type="Texture" id=1]
+[ext_resource path="res://StartPage.gd" type="Script" id=2]
+[ext_resource path="res://FrontSunWarrior3.png" type="Texture" id=3]
+
+[node name="StartPage" type="Node2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 512, 299.056 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="TutorialButton" type="Button" parent="Sprite"]
+show_behind_parent = true
+margin_left = -110.0
+margin_top = -47.0
+margin_right = 130.0
+margin_bottom = -11.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FrontSunWarrior3" type="Sprite" parent="."]
+position = Vector2( 512, 220 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 3 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+margin_left = 412.0
+margin_top = 425.0
+margin_right = 612.0
+margin_bottom = 465.0
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "You are an ancient Sun Warrior tasked with keeping taking the sacred flame to the masters. Hoever, the flame does not last forever , and you must stop constantly to replenish it."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Play2" type="RichTextLabel" parent="."]
+margin_left = 470.0
+margin_top = 320.0
+margin_right = 498.0
+margin_bottom = 336.0
+rect_scale = Vector2( 3, 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "Play"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayButton" type="Button" parent="."]
+show_behind_parent = true
+margin_left = 468.0
+margin_top = 320.0
+margin_right = 554.0
+margin_bottom = 363.0
+text = "Play"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Play" type="RichTextLabel" parent="."]
+margin_left = 437.0
+margin_top = 250.0
+margin_right = 487.0
+margin_bottom = 266.0
+rect_scale = Vector2( 3, 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "Tutorial"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="RichTextLabel" parent="."]
+margin_left = 322.0
+margin_top = 130.0
+margin_right = 398.0
+margin_bottom = 146.0
+rect_scale = Vector2( 5, 5 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "Sun Warrior"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TutorialButton" type="Button" parent="."]
+show_behind_parent = true
+margin_left = 439.0
+margin_top = 250.0
+margin_right = 580.0
+margin_bottom = 284.0
+text = "Play"
+__meta__ = {
+"_edit_use_anchors_": false
+}

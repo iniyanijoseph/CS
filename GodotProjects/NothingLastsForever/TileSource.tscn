@@ -1,0 +1,75 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Rock.png" type="Texture" id=3]
+[ext_resource path="res://Dirt.png" type="Texture" id=4]
+[ext_resource path="res://CurvedRock.png" type="Texture" id=5]
+[ext_resource path="res://GrassBlock.png" type="Texture" id=6]
+[ext_resource path="res://Blank.png" type="Texture" id=7]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16, 16.0575 )
+
+[node name="TileSetSource" type="Node2D"]
+
+[node name="Grass" type="Sprite" parent="."]
+texture = ExtResource( 6 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 32, 32 )
+
+[node name="KinematicBody2D" type="StaticBody2D" parent="Grass"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Grass/KinematicBody2D"]
+shape = SubResource( 1 )
+
+[node name="Rock" type="Sprite" parent="."]
+position = Vector2( 64, 0 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 32, 32 )
+
+[node name="KinematicBody2D" type="StaticBody2D" parent="Rock"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rock/KinematicBody2D"]
+shape = SubResource( 1 )
+
+[node name="Dirt" type="Sprite" parent="."]
+position = Vector2( 128, 0 )
+texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 32, 32 )
+
+[node name="KinematicBody2D" type="StaticBody2D" parent="Dirt"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dirt/KinematicBody2D"]
+shape = SubResource( 1 )
+
+[node name="CurvedRock" type="Sprite" parent="."]
+position = Vector2( 192, 0 )
+texture = ExtResource( 5 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 32, 32 )
+
+[node name="KinematicBody2D" type="StaticBody2D" parent="CurvedRock"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CurvedRock/KinematicBody2D"]
+shape = SubResource( 1 )
+
+[node name="Boundary" type="Sprite" parent="."]
+position = Vector2( 256, 0 )
+texture = ExtResource( 7 )
+
+[node name="Boundary" type="StaticBody2D" parent="Boundary"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundary/Boundary"]
+shape = SubResource( 1 )
+
+[node name="EnemyBouncer" type="Sprite" parent="."]
+position = Vector2( 320, 0 )
+texture = ExtResource( 7 )
+
+[node name="EnemyBouncer" type="StaticBody2D" parent="EnemyBouncer"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyBouncer/EnemyBouncer"]
+shape = SubResource( 1 )
